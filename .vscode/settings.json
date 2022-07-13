@@ -1,4 +1,10 @@
 {
     "cortex-debug.armToolchainPath": "/usr/bin",
-    "cortex-debug.openocdPath": "/usr/local/bin/openocd"
+    "cortex-debug.openocdPath": "/usr/local/bin/openocd",
+    "files.associations": {
+        "math.h": "c",
+        "font.h": "c",
+        "FONT.H": "cpp",
+        "spi.h": "c"
+    }
 }
