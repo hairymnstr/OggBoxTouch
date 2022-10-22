@@ -80,6 +80,7 @@ includeDirectories:
   - Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
   - Middlewares/ST/STM32_USB_Host_Library/Core/Inc
   - Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc
+  - Middlewares/Third_Party/lvgl/src
   - Drivers/CMSIS/Device/ST/STM32F4xx/Include
   - Drivers/CMSIS/Include
   - Inc/**
@@ -88,6 +89,7 @@ includeDirectories:
   - Src/**
   - Core/Src/**
   - Core/Lib/**
+  - Application/Inc/**
 
 
 # Files that should be included in the compilation.
@@ -149,9 +151,11 @@ sourceFiles:
   - Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
   - Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
   - Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c
+  - Middlewares/Third_Party/lvgl/src/**
   - Src/**
   - Core/Src/**
   - Core/Lib/**
+  - Application/Src/**
 
 
 # When no makefile is present it will show a warning pop-up.

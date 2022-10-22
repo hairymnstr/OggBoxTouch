@@ -3,6 +3,7 @@
     {
       "name": "STM32",
       "includePath": [
+        "Application/Inc",
         "Core/Inc",
         "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
         "Drivers/CMSIS/Include",
@@ -13,6 +14,7 @@
         "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS",
         "Middlewares/Third_Party/FreeRTOS/Source/include",
         "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+        "Middlewares/Third_Party/lvgl/src",
         "USB_HOST/App",
         "USB_HOST/Target"
       ],

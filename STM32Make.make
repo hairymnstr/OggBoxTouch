@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Application/Src/lv_port_disp.c \
 Core/Src/GUI.c \
 Core/Src/freertos.c \
 Core/Src/lcd.c \
@@ -89,6 +90,196 @@ Middlewares/Third_Party/FreeRTOS/Source/queue.c \
 Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c \
 Middlewares/Third_Party/FreeRTOS/Source/tasks.c \
 Middlewares/Third_Party/FreeRTOS/Source/timers.c \
+Middlewares/Third_Party/lvgl/src/core/lv_disp.c \
+Middlewares/Third_Party/lvgl/src/core/lv_event.c \
+Middlewares/Third_Party/lvgl/src/core/lv_group.c \
+Middlewares/Third_Party/lvgl/src/core/lv_indev.c \
+Middlewares/Third_Party/lvgl/src/core/lv_indev_scroll.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_class.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_draw.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_pos.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_scroll.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_style.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_style_gen.c \
+Middlewares/Third_Party/lvgl/src/core/lv_obj_tree.c \
+Middlewares/Third_Party/lvgl/src/core/lv_refr.c \
+Middlewares/Third_Party/lvgl/src/core/lv_theme.c \
+Middlewares/Third_Party/lvgl/src/draw/arm2d/lv_gpu_arm2d.c \
+Middlewares/Third_Party/lvgl/src/draw/gd32_ipa/lv_gpu_gd32_ipa.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_arc.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_img.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_label.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_layer.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_line.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_mask.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_rect.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_transform.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_draw_triangle.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_img_buf.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_img_cache.c \
+Middlewares/Third_Party/lvgl/src/draw/lv_img_decoder.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/lv_gpu_nxp.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/pxp/lv_draw_pxp_blend.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp_osa.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/vglite/lv_draw_vglite_blend.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/vglite/lv_draw_vglite_rect.c \
+Middlewares/Third_Party/lvgl/src/draw/nxp/vglite/lv_gpu_nxp_vglite.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_arc.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_bg.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_composite.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_img.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_label.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_layer.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_line.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_mask.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_polygon.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_rect.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_stack_blur.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_texture_cache.c \
+Middlewares/Third_Party/lvgl/src/draw/sdl/lv_draw_sdl_utils.c \
+Middlewares/Third_Party/lvgl/src/draw/stm32_dma2d/lv_gpu_stm32_dma2d.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_arc.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_blend.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_dither.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_gradient.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_img.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_layer.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_letter.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_line.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_polygon.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_rect.c \
+Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_transform.c \
+Middlewares/Third_Party/lvgl/src/draw/swm341_dma2d/lv_gpu_swm341_dma2d.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_fmt_txt.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_loader.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_10.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_12.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_12_subpx.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_14.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_16.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_18.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_20.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_22.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_24.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_26.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_28.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_28_compressed.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_30.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_32.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_34.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_36.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_38.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_40.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_42.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_44.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_46.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_48.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_montserrat_8.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_simsun_16_cjk.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_unscii_16.c \
+Middlewares/Third_Party/lvgl/src/font/lv_font_unscii_8.c \
+Middlewares/Third_Party/lvgl/src/hal/lv_hal_disp.c \
+Middlewares/Third_Party/lvgl/src/hal/lv_hal_indev.c \
+Middlewares/Third_Party/lvgl/src/hal/lv_hal_tick.c \
+Middlewares/Third_Party/lvgl/src/layouts/flex/lv_flex.c \
+Middlewares/Third_Party/lvgl/src/layouts/grid/lv_grid.c \
+Middlewares/Third_Party/lvgl/src/libs/bmp/lv_bmp.c \
+Middlewares/Third_Party/lvgl/src/libs/ffmpeg/lv_ffmpeg.c \
+Middlewares/Third_Party/lvgl/src/libs/freetype/lv_freetype.c \
+Middlewares/Third_Party/lvgl/src/libs/fsdrv/lv_fs_cbfs.c \
+Middlewares/Third_Party/lvgl/src/libs/fsdrv/lv_fs_fatfs.c \
+Middlewares/Third_Party/lvgl/src/libs/fsdrv/lv_fs_posix.c \
+Middlewares/Third_Party/lvgl/src/libs/fsdrv/lv_fs_stdio.c \
+Middlewares/Third_Party/lvgl/src/libs/fsdrv/lv_fs_win32.c \
+Middlewares/Third_Party/lvgl/src/libs/gif/gifdec.c \
+Middlewares/Third_Party/lvgl/src/libs/gif/lv_gif.c \
+Middlewares/Third_Party/lvgl/src/libs/png/lodepng.c \
+Middlewares/Third_Party/lvgl/src/libs/png/lv_png.c \
+Middlewares/Third_Party/lvgl/src/libs/qrcode/lv_qrcode.c \
+Middlewares/Third_Party/lvgl/src/libs/qrcode/qrcodegen.c \
+Middlewares/Third_Party/lvgl/src/libs/rlottie/lv_rlottie.c \
+Middlewares/Third_Party/lvgl/src/libs/sjpg/lv_sjpg.c \
+Middlewares/Third_Party/lvgl/src/libs/sjpg/tjpgd.c \
+Middlewares/Third_Party/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_anim.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_anim_timeline.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_area.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_async.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_bidi.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_color.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_fs.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_gc.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_ll.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_log.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_lru.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_malloc_builtin.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_math.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_mem.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_memcpy_builtin.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_printf.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_style.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_style_gen.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_templ.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_timer.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_tlsf.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_txt.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_txt_ap.c \
+Middlewares/Third_Party/lvgl/src/misc/lv_utils.c \
+Middlewares/Third_Party/lvgl/src/others/file_explorer/lv_file_explorer.c \
+Middlewares/Third_Party/lvgl/src/others/fragment/lv_fragment.c \
+Middlewares/Third_Party/lvgl/src/others/fragment/lv_fragment_manager.c \
+Middlewares/Third_Party/lvgl/src/others/gridnav/lv_gridnav.c \
+Middlewares/Third_Party/lvgl/src/others/ime/lv_ime_pinyin.c \
+Middlewares/Third_Party/lvgl/src/others/imgfont/lv_imgfont.c \
+Middlewares/Third_Party/lvgl/src/others/monkey/lv_monkey.c \
+Middlewares/Third_Party/lvgl/src/others/msg/lv_msg.c \
+Middlewares/Third_Party/lvgl/src/others/snapshot/lv_snapshot.c \
+Middlewares/Third_Party/lvgl/src/themes/basic/lv_theme_basic.c \
+Middlewares/Third_Party/lvgl/src/themes/default/lv_theme_default.c \
+Middlewares/Third_Party/lvgl/src/themes/mono/lv_theme_mono.c \
+Middlewares/Third_Party/lvgl/src/widgets/animimg/lv_animimg.c \
+Middlewares/Third_Party/lvgl/src/widgets/arc/lv_arc.c \
+Middlewares/Third_Party/lvgl/src/widgets/bar/lv_bar.c \
+Middlewares/Third_Party/lvgl/src/widgets/btn/lv_btn.c \
+Middlewares/Third_Party/lvgl/src/widgets/btnmatrix/lv_btnmatrix.c \
+Middlewares/Third_Party/lvgl/src/widgets/calendar/lv_calendar.c \
+Middlewares/Third_Party/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c \
+Middlewares/Third_Party/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c \
+Middlewares/Third_Party/lvgl/src/widgets/canvas/lv_canvas.c \
+Middlewares/Third_Party/lvgl/src/widgets/chart/lv_chart.c \
+Middlewares/Third_Party/lvgl/src/widgets/checkbox/lv_checkbox.c \
+Middlewares/Third_Party/lvgl/src/widgets/colorwheel/lv_colorwheel.c \
+Middlewares/Third_Party/lvgl/src/widgets/dropdown/lv_dropdown.c \
+Middlewares/Third_Party/lvgl/src/widgets/img/lv_img.c \
+Middlewares/Third_Party/lvgl/src/widgets/imgbtn/lv_imgbtn.c \
+Middlewares/Third_Party/lvgl/src/widgets/keyboard/lv_keyboard.c \
+Middlewares/Third_Party/lvgl/src/widgets/label/lv_label.c \
+Middlewares/Third_Party/lvgl/src/widgets/led/lv_led.c \
+Middlewares/Third_Party/lvgl/src/widgets/line/lv_line.c \
+Middlewares/Third_Party/lvgl/src/widgets/list/lv_list.c \
+Middlewares/Third_Party/lvgl/src/widgets/menu/lv_menu.c \
+Middlewares/Third_Party/lvgl/src/widgets/meter/lv_meter.c \
+Middlewares/Third_Party/lvgl/src/widgets/msgbox/lv_msgbox.c \
+Middlewares/Third_Party/lvgl/src/widgets/objx_templ/lv_objx_templ.c \
+Middlewares/Third_Party/lvgl/src/widgets/roller/lv_roller.c \
+Middlewares/Third_Party/lvgl/src/widgets/slider/lv_slider.c \
+Middlewares/Third_Party/lvgl/src/widgets/span/lv_span.c \
+Middlewares/Third_Party/lvgl/src/widgets/spinbox/lv_spinbox.c \
+Middlewares/Third_Party/lvgl/src/widgets/spinner/lv_spinner.c \
+Middlewares/Third_Party/lvgl/src/widgets/switch/lv_switch.c \
+Middlewares/Third_Party/lvgl/src/widgets/table/lv_table.c \
+Middlewares/Third_Party/lvgl/src/widgets/tabview/lv_tabview.c \
+Middlewares/Third_Party/lvgl/src/widgets/textarea/lv_textarea.c \
+Middlewares/Third_Party/lvgl/src/widgets/tileview/lv_tileview.c \
+Middlewares/Third_Party/lvgl/src/widgets/win/lv_win.c \
 USB_HOST/App/usb_host.c \
 USB_HOST/Target/usbh_conf.c \
 USB_HOST/Target/usbh_platform.c
@@ -163,6 +354,7 @@ AS_INCLUDES = \
 
 # C includes
 C_INCLUDES =  \
+-IApplication/Inc \
 -ICore/Inc \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
@@ -173,6 +365,7 @@ C_INCLUDES =  \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
 -IMiddlewares/Third_Party/FreeRTOS/Source/include \
 -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
+-IMiddlewares/Third_Party/lvgl/src \
 -IUSB_HOST/App \
 -IUSB_HOST/Target
 
@@ -262,13 +455,13 @@ $(BUILD_DIR):
 # flash
 #######################################
 flash: $(BUILD_DIR)/$(TARGET).elf
-	"/usr/local/bin/openocd" -f ./openocd.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+	"/home/nathan/.config/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.11.0-5.1/.content/bin/openocd" -f ./openocd.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
 
 #######################################
 # erase
 #######################################
 erase: $(BUILD_DIR)/$(TARGET).elf
-	"/usr/local/bin/openocd" -f ./openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"
+	"/home/nathan/.config/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.11.0-5.1/.content/bin/openocd" -f ./openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"
 
 #######################################
 # clean up
