@@ -30,6 +30,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 /**********************
  *  STATIC VARIABLES
  **********************/
+SemaphoreHandle_t screen_write_sem = NULL;
 
 /**********************
  *      MACROS
@@ -44,6 +45,7 @@ void lv_port_disp_init(void)
     /*-------------------------
      * Initialize your display
      * -----------------------*/
+	screen_write_sem = xSemaphoreCreateBinary();
     disp_init();
 
     /*-----------------------------
@@ -220,6 +222,14 @@ static void disp_init(void)
 	lcd_wr_data(0x24);
 	lcd_wr_data(0x20);
 	lcd_wr_data(0x00);
+
+	// COLMOD - Pixel Format
+	// Sets the interface bits per pixel
+	// Upper nibble specifies RGB interface (not used here)
+	// Lower nibble specifies CPU interface
+	//  0x5 - 16 bits/pixel
+	//  0x6 - 18 bits/pixel
+	// none of this applies to SPI
 	lcd_wr_reg(0x3A);
 	lcd_wr_data(0x66);
 	lcd_wr_reg(0x11);
@@ -251,6 +261,13 @@ void disp_disable_update(void)
     disp_flush_enabled = false;
 }
 
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	BaseType_t woken = pdFALSE;
+	xSemaphoreGiveFromISR(screen_write_sem, &woken);
+	portEND_SWITCHING_ISR(woken);
+}
+
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
  *'lv_disp_flush_ready()' has to be called when finished.*/
@@ -262,14 +279,51 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
   		lcd_set_windows(area->x1,area->y1,area->x2,area->y2);
 		HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_SET);
-		for(int32_t i=area->y1;i<area->y2;i++)
+
+		// two stage process, one convert from 16 bit RGB to 24 bit RGB using a manually allocated buffer in the SDRAM
+		uint8_t *col_buf = (uint8_t *)0xD0100000;
+
+		for(lv_coord_t x = area->x1;x < area->x2;x++)
 		{
-    		for(int32_t m=area->x1;m<area->x2;m++)
-    		{	
-				lcd_write_data_16bit(color_p->full);
-				color_p++;
+			for(lv_coord_t y = area->y1;y < area->y2;y++)
+			{
+				*col_buf ++ = (color_p->full >> 8) & 0xF8; 	// RED
+				*col_buf ++ = (color_p->full >> 3) & 0xFC;	//GREEN
+				*col_buf ++ = (color_p->full << 3);			//BLUE
+				color_p ++;
 			}
 		}
+
+		// Then send out that 24 bit colour sequence
+		// but! the STM32 DMA transfers are limited at 65535 bytes! so we need to chunk this up
+		uint32_t bytes_to_write = (area->y2 - area->y1) * (area->x2 - area->x1) * 3;
+		uint32_t bytes_written = 0;
+		while(bytes_written < bytes_to_write)
+		{
+			uint32_t chunk_size = bytes_to_write - bytes_written;
+			if(chunk_size > 65535)
+			{
+				chunk_size = 65535;
+			}
+			HAL_StatusTypeDef err = HAL_SPI_Transmit_DMA(LCD_SPI, (uint8_t *)(0xD0100000 + bytes_written), chunk_size);
+
+			if(err != HAL_OK)
+			{
+				while(1) {;}
+			}
+			xSemaphoreTake(screen_write_sem, portMAX_DELAY);
+			bytes_written += chunk_size;
+		}
+
+		// for(int32_t i=area->y1;i<area->y2;i++)
+		// {
+    	// 	for(int32_t m=area->x1;m<area->x2;m++)
+    	// 	{	
+		// 		lcd_write_data_16bit(color_p->full);
+		// 		color_p++;
+		// 	}
+		// }
+
 	 	HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET);
 	}
 
