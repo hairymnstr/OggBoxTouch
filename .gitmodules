@@ -1,3 +1,9 @@
 [submodule "Middlewares/Third_Party/lvgl"]
 	path = Middlewares/Third_Party/lvgl
 	url = https://github.com/lvgl/lvgl.git
+[submodule "Middlewares/Third_Party/tremor"]
+	path = Middlewares/Third_Party/tremor
+	url = https://gitlab.xiph.org/xiph/tremor.git
+[submodule "Middlewares/Third_Party/ogg"]
+	path = Middlewares/Third_Party/ogg
+	url = https://gitlab.xiph.org/xiph/ogg.git
